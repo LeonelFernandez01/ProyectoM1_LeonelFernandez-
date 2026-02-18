@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>generador de paletas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Generador de Paletas de Colores</h1>
+    <p class="subtitulo">Elegi el tamaño de tu paleta y genera tu paleta,Clic en una tarjeta para copiar el codigp HEX.</p>
+   <!--CONTROLES-->
+    <div class="controles">
+      <label for="cantidad">Cantidad de colores:</label>
+      <select id="cantidad">
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        </select>
+        <button onclick="generarPaleta()">Generar Paleta</button>
+    </div>
+    <!--PALETA-->
+    <div id="paleta" class="paleta"></div>
+    <!--MENSAJE AL COPIAR-->
+    <p class="mensaje-copia" id="mensaje"></p>
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="script.js"></script>
+
+</body> 
+</html>
