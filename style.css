@@ -93,6 +93,12 @@ button:hover {
 button:active {
   transform: scale(0.97);
 }
+.codigo-resaltado {
+  background-color: #6c3fcf !important;
+  color: white !important;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
 
 /* =====================
    PALETA DE COLORES

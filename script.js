@@ -32,11 +32,12 @@
       return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     }
 
-    function generarPaleta() {
+        function generarPaleta() {
       const contenedor = document.getElementById('paleta');
       contenedor.innerHTML = '';
 
       const cantidad = parseInt(document.getElementById('cantidad').value);
+      const formatoElegido = document.getElementById('formato').value;
 
       for (let i = 0; i < cantidad; i++) {
         const color = generarColor();
@@ -58,6 +59,9 @@
         const codigoHex = document.createElement('p');
         codigoHex.classList.add('color-codigo');
         codigoHex.textContent = color.hex;
+        if (formatoElegido === 'hex') {
+          codigoHex.classList.add('codigo-resaltado');
+        }
 
         const sep = document.createElement('hr');
         sep.classList.add('separador');
@@ -69,6 +73,9 @@
         const codigoHsl = document.createElement('p');
         codigoHsl.classList.add('color-codigo');
         codigoHsl.textContent = color.hsl;
+        if (formatoElegido === 'hsl') {
+          codigoHsl.classList.add('codigo-resaltado');
+        }
 
         info.appendChild(labelHex);
         info.appendChild(codigoHex);
@@ -80,8 +87,9 @@
         card.appendChild(info);
 
         card.addEventListener('click', function () {
-          navigator.clipboard.writeText(color.hex).then(function () {
-            document.getElementById('mensaje').textContent = '✅ Copiado: ' + color.hex;
+          const codigoACopiar = formatoElegido === 'hex' ? color.hex : color.hsl;
+          navigator.clipboard.writeText(codigoACopiar).then(function () {
+            document.getElementById('mensaje').textContent = '✅ Copiado: ' + codigoACopiar;
             setTimeout(function () {
               document.getElementById('mensaje').textContent = '';
             }, 2000);
@@ -92,7 +100,5 @@
       }
     }
 
-    generarPaleta();
-    console.log('Paleta de colores generada');
-    
+       
 
