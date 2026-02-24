@@ -114,17 +114,6 @@ Si usas **Visual Studio Code**:
 # Click derecho en index.html > Open with Live Server
 ```
 
-Si usas **Python 3**:
-```bash
-python -m http.server 8000
-# Luego abre: http://localhost:8000
-```
-
-Si usas **Node.js**:
-```bash
-npx http-server
-# Luego abre la URL que aparezca en la terminal
-```
 
 3. **Verificar que funciona:**
    - Verás el título "Generador de Paletas de Colores"
@@ -160,44 +149,6 @@ git push -u origin main
 
 4. **Acceder a la aplicación:**
    - Tu sitio estará disponible en: `https://tu-usuario.github.io/generador-paletas`
-
-### Opción 2: Desplegar en Vercel (Recomendado)
-
-1. **Registrarse en Vercel:**
-   - Ve a [vercel.com](https://vercel.com)
-   - Inicia sesión con tu cuenta de GitHub
-
-2. **Importar el proyecto:**
-   - Click en "Add New" > "Project"
-   - Selecciona tu repositorio GitHub
-   - Vercel detectará automáticamente que es un proyecto estático
-   - Haz clic en "Deploy"
-
-3. **Tu aplicación estará live en minutos:**
-   - Recibirás una URL como: `https://generador-paletas.vercel.app`
-
-### Opción 3: Desplegar en Netlify
-
-1. **Registrarse en Netlify:**
-   - Ve a [netlify.com](https://netlify.com)
-   - Inicia sesión con GitHub
-
-2. **Conectar el repositorio:**
-   - Click en "New site from Git"
-   - Selecciona tu repositorio
-   - Haz clic en "Deploy site"
-
-3. **Tu sitio estará disponible con una URL personalizada**
-
-### Opción 4: Desplegar en un servidor propio
-
-1. **Subir archivos vía FTP:**
-   - Conecta a tu servidor con FTP
-   - Copia los archivos: `index.html`, `style.css`, `script.js`
-   - Asegúrate de que `index.html` sea el archivo raíz
-
-2. **Acceder a tu sitio:**
-   - Usa la URL de tu dominio: `https://tu-dominio.com`
 
 ---
 
