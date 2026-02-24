@@ -9,6 +9,8 @@ Aplicación web interactiva para generar paletas de colores aleatorias en format
 
 - [Manual de Instrucciones de Uso](#manual-de-instrucciones-de-uso)
 - [Decisiones Técnicas](#decisiones-técnicas)
+- [Estructura del DOM](#estructura-del-dom)
+- [Manipulación del DOM](#manipulación-del-dom)
 - [Pasos para Descargar y Ejecutar](#pasos-para-descargar-y-ejecutar)
 - [Pasos para Desplegar la Aplicación](#pasos-para-desplegar-la-aplicación)
 - [Autor](#autor)
@@ -85,6 +87,145 @@ Aplicación web interactiva para generar paletas de colores aleatorias en format
 
 ---
 
+## 🏗️ Estructura del DOM
+
+La estructura HTML del proyecto está organizada de la siguiente manera:
+
+```html
+<body>
+  <h1>Generador de Paletas de Colores</h1>
+  <p class="subtitulo">Descripción de la aplicación</p>
+  
+  <!-- CONTROLES: Selectores y botón de generación -->
+  <div class="controles">
+    <label for="cantidad">Cantidad de colores:</label>
+    <select id="cantidad">...</select>
+    
+    <label for="formato">Formato:</label>
+    <select id="formato">...</select>
+    
+    <button onclick="generarPaleta()">Generar Paleta</button>
+  </div>
+  
+  <!-- PALETA: Contenedor donde se insertan las tarjetas de color dinámicamente -->
+  <div id="paleta" class="paleta"></div>
+  
+  <!-- MENSAJE: Área de mensaje para feedback del usuario -->
+  <p class="mensaje-copia" id="mensaje"></p>
+  
+  <!-- FOOTER: Pie de página -->
+  <footer>...</footer>
+</body>
+```
+
+### Elementos principales:
+
+| Elemento | ID/Clase | Función |
+|----------|----------|----------|
+| `<select>` | `id="cantidad"` | Selector para elegir cantidad de colores (6, 8, 9) |
+| `<select>` | `id="formato"` | Selector para elegir formato (HEX, HSL) |
+| `<button>` | `onclick="generarPaleta()"` | Genera la paleta según los parámetros seleccionados |
+| `<div>` | `id="paleta"` | Contenedor donde se insertan dinámicamente las tarjetas |
+| `.color-card` | Clase | Tarjeta individual de color (creada dinámicamente) |
+| `.color-box` | Clase | Cuadro de color en la tarjeta |
+| `.color-info` | Clase | Información del color (HEX y HSL) |
+| `<p>` | `id="mensaje"` | Muestra mensajes de confirmación al usuario |
+
+---
+
+## 🔨 Manipulación del DOM
+
+La aplicación manipula el DOM de varias formas para crear una experiencia interactiva:
+
+### 1. **Selección de elementos:**
+```javascript
+document.getElementById("cantidad")
+document.getElementById("formato")
+document.getElementById("paleta")
+document.getElementById("mensaje")
+```
+
+### 2. **Event Listeners (Escuchadores de eventos):**
+
+- **Cambio en cantidad de colores:**
+  ```javascript
+  document.getElementById("cantidad").addEventListener("change", function () {
+    // Muestra mensaje de confirmación durante 2 segundos
+    document.getElementById("mensaje").textContent = `✅ Cantidad seleccionada: ${cantidad} colores`;
+  });
+  ```
+
+- **Cambio en formato:**
+  ```javascript
+  document.getElementById("formato").addEventListener("change", function () {
+    // Muestra el formato seleccionado
+    document.getElementById("mensaje").textContent = `✅ Formato seleccionado: ${formatoTexto}`;
+  });
+  ```
+
+### 3. **Creación dinámica de elementos:**
+
+La función `generarPaleta()` crea dinámicamente las tarjetas:
+
+```javascript
+// Crear tarjeta de color
+const card = document.createElement("div");
+card.classList.add("color-card");
+
+// Crear cuadro de color
+const box = document.createElement("div");
+box.classList.add("color-box");
+box.style.backgroundColor = color.hsl;  // Asignar color dinámicamente
+
+// Crear información del color
+const info = document.createElement("div");
+info.classList.add("color-info");
+
+// Añadir elementos al contenedor
+card.appendChild(box);
+card.appendChild(info);
+contenedor.appendChild(card);
+```
+
+### 4. **Manipulación de clases:**
+
+- **Resaltar formato seleccionado:**
+  ```javascript
+  if (formatoElegido === "hex") {
+    codigoHex.classList.add("codigo-resaltado");
+  }
+  ```
+
+### 5. **Event Listeners en elementos dinámicos:**
+
+```javascript
+// Copiar código al hacer clic en tarjeta
+card.addEventListener("click", function () {
+  const codigoACopiar = formatoElegido === "hex" ? color.hex : color.hsl;
+  navigator.clipboard.writeText(codigoACopiar);
+  // Mostrar mensaje de confirmación
+  document.getElementById("mensaje").textContent = "✅ Copiado: " + codigoACopiar;
+});
+```
+
+### 6. **Modificación de contenido:**
+
+```javascript
+// Limpiar paleta anterior
+contenedor.innerHTML = "";
+
+// Asignar texto a elementos
+codigoHex.textContent = color.hex;
+codigoHsl.textContent = color.hsl;
+
+// Mostrar/Ocultar mensajes con temporizadores
+setTimeout(function () {
+  document.getElementById("mensaje").textContent = "";
+}, 2000);
+```
+
+---
+
 ## 💻 Pasos para Descargar y Ejecutar
 
 ### Requisitos previos:
@@ -95,8 +236,8 @@ Aplicación web interactiva para generar paletas de colores aleatorias en format
 
 1. **Clonar el repositorio:**
 ```bash
-git clone https://github.com/tu-usuario/Proyecto Henry M1.git
-cd "Proyecto Henry M1"
+git clone https://github.com/LeonelFernandez01/ProyectoM1_LeonelFernandez-.git
+cd "ProyectoM1_LeonelFernandez-"
 ```
 
 2. **Abrir la aplicación localmente:**
@@ -124,31 +265,25 @@ Si usas **Visual Studio Code**:
 
 ## 🚀 Pasos para Desplegar la Aplicación
 
-### Opción 1: Desplegar en GitHub Pages (Gratis)
+### Desplegar en GitHub Pages (Gratis)
 
-1. **Crear un repositorio en GitHub:**
-   - Ve a [github.com](https://github.com)
-   - Crea un nuevo repositorio público llamado `generador-paletas`
-
-2. **Subir los archivos:**
-```bash
-git init
-git add .
-git commit -m "Initial commit: Generador de paletas"
-git branch -M main
-git remote add origin https://github.com/tu-usuario/generador-paletas.git
-git push -u origin main
+1. **El repositorio ya existe en:**
+```
+https://github.com/LeonelFernandez01/ProyectoM1_LeonelFernandez-.git
 ```
 
-3. **Habilitar GitHub Pages:**
-   - Ve a **Settings** del repositorio
+2. **Habilitar GitHub Pages:**
+   - Ve a **Settings** del repositorio en GitHub
    - En la sección "Pages" selecciona:
      - Source: `main` branch
      - Folder: `/ (root)`
    - Guarda los cambios
 
-4. **Acceder a la aplicación:**
-   - Tu sitio estará disponible en: `https://tu-usuario.github.io/generador-paletas`
+3. **Acceder a la aplicación desplegada:**
+   - Tu sitio estará disponible en:
+```
+https://leonelfernandez01.github.io/ProyectoM1_LeonelFernandez-/
+```
 
 ---
 
